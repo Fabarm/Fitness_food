@@ -241,8 +241,10 @@ window.addEventListener('DOMContentLoaded', () =>{
             // form.append(statusMessage); Чтоб не рвалась верстка делаем как ниже
             form.insertAdjacentElement('afterend', statusMessage);
 
-            const request = new XMLHttpRequest();
-            request.open("POST", "server.php");
+        //XMLHttpRequest переделал на Fetch()
+            // const request = new XMLHttpRequest();
+            // request.open("POST", "server.php");
+
 
             // В ФОРМАТЕ FORM-DATA
             // request.setRequestHeader('Content-type', 'multipart/form-data')
@@ -250,7 +252,27 @@ window.addEventListener('DOMContentLoaded', () =>{
             // request.send(formData);
 
             //В ФОРМАТЕ JSON
-            request.setRequestHeader('Content-type', 'application/json')
+            // request.setRequestHeader('Content-type', 'application/json') Переделал на Fetch()
+            // const formData = new FormData(form);
+
+            // const object={}
+            //     formData.forEach(function (value, key){
+            //         object[key] = value;
+            //     })
+            //
+            // const json = JSON.stringify(object)
+            // request.send(json);
+            // request.addEventListener('load', ()=> {
+            //     if(request.status === 200){
+            //         console.log(request.response);
+            //         showThanksModal(message.success);
+            //         form.reset();
+            //         statusMessage.remove();
+            //     } else {
+            //         showThanksModal(message.failure);
+            //     }
+            // })
+
             const formData = new FormData(form);
 
             const object={}
@@ -258,19 +280,24 @@ window.addEventListener('DOMContentLoaded', () =>{
                     object[key] = value;
                 })
 
-            const json = JSON.stringify(object)
-
-            request.send(json);
-            request.addEventListener('load', ()=> {
-                if(request.status === 200){
-                    console.log(request.response);
-                    showThanksModal(message.success);
-                    form.reset();
-                    statusMessage.remove();
-                } else {
-                    showThanksModal(message.failure);
-                }
+            fetch('server.php', {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'aplication/json'
+                },
+                body: JSON.stringify(object)
+            }).then(data => {
+                console.log(data);
+                showThanksModal(message.success);
+                statusMessage.remove();
+            }).catch(() => {
+                showThanksModal(message.failure);
+            }).finally(()=>{
+                form.reset();
             })
+
+
+
         })
     }
 
