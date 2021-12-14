@@ -345,13 +345,14 @@ window.addEventListener('DOMContentLoaded', () =>{
     }
 
     //Подключаю слайдер
-
-    let slideIndex = 1;
+    
     const slides = document.querySelectorAll('.offer__slide'),
         prev = document.querySelector('.offer__slider-prev'),
         next = document.querySelector('.offer__slider-next'),
         total = document.querySelector('#total'),
         current = document.querySelector('#current');
+
+    let slideIndex = 1;    
 
     showSlides(slideIndex);
 
@@ -371,7 +372,7 @@ window.addEventListener('DOMContentLoaded', () =>{
 
         slides.forEach((item) => item.style.display = 'none');
 
-        slides[slideIndex - 1].style.display = 'block'; // Как ваша самостоятельная работа - переписать на использование классов show/hide
+        slides[slideIndex - 1].style.display = 'block';
         
         if (slides.length < 10) {
             current.textContent =  `0${slideIndex}`;
@@ -391,5 +392,7 @@ window.addEventListener('DOMContentLoaded', () =>{
     next.addEventListener('click', function(){
         plusSlides(1);
     });
+
+
 
 });
