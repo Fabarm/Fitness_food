@@ -3,26 +3,26 @@ window.addEventListener('DOMContentLoaded', () =>{
    // СОЗДАЮ ТАБЫ
     const tabs = document.querySelectorAll('.tabheader__item'),
           tabsContent = document.querySelectorAll('.tabcontent'),
-          tabsParent = document.querySelector('.tabheader__items')
+          tabsParent = document.querySelector('.tabheader__items');
 
     function hideTabContent(){
         tabsContent.forEach(item=>{
             item.classList.add('hide');
             item.classList.remove('show', 'fade');
-        })
+        });
         tabs.forEach(item=>{
-            item.classList.remove('tabheader__item_active')
-        })
+            item.classList.remove('tabheader__item_active');
+        });
     }
     function showTabContent(i= 0) {
         tabsContent[i].classList.add('show', 'fade');
         tabsContent[i].classList.remove('hide');
-        tabs[i].classList.add('tabheader__item_active')
+        tabs[i].classList.add('tabheader__item_active');
     }
     hideTabContent();
     showTabContent();
 
-    tabsParent.addEventListener('click', (event) =>{
+    tabsParent.addEventListener('click', event => {
         const target = event.target;
 
         if(target && target.classList.contains('tabheader__item')){
@@ -86,7 +86,7 @@ window.addEventListener('DOMContentLoaded', () =>{
         }
     }
 
-    setClock('.timer', deadLine)
+    setClock('.timer', deadLine);
 
     //Подключаю Модальное окно
     const modalTrigger = document.querySelectorAll('[data-modal]'),
@@ -136,10 +136,10 @@ window.addEventListener('DOMContentLoaded', () =>{
     function showModalByScroll(){
         if(window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight -1){
             openModal();
-            window.removeEventListener('scroll', showModalByScroll)
+            window.removeEventListener('scroll', showModalByScroll);
         }
     }
-    window.addEventListener('scroll', showModalByScroll)
+    window.addEventListener('scroll', showModalByScroll);
 
     //Использую классы для карточек
 
@@ -151,7 +151,7 @@ window.addEventListener('DOMContentLoaded', () =>{
             this.descr = descr;
             this.price = price;
             this.classes = classes
-            this.parent = document.querySelector(parentSelector)
+            this.parent = document.querySelector(parentSelector);
             this.transfer = 27;
             this.changeToUAH();
         }
@@ -167,7 +167,7 @@ window.addEventListener('DOMContentLoaded', () =>{
                 this.classes = 'menu__item';
                 element.classList.add(this.classes);
             } else {
-                this.classes.forEach(className => element.classList.add(className))
+                this.classes.forEach(className => element.classList.add(className));
             }
 
             element.innerHTML = `                
@@ -278,7 +278,7 @@ window.addEventListener('DOMContentLoaded', () =>{
             const object={}
                 formData.forEach(function (value, key){
                     object[key] = value;
-                })
+                });
 
             fetch('server.php', {
                 method: 'POST',
@@ -294,11 +294,8 @@ window.addEventListener('DOMContentLoaded', () =>{
                 showThanksModal(message.failure);
             }).finally(()=>{
                 form.reset();
-            })
-
-
-
-        })
+            });
+        });
     }
 
     // Добавляю спинер и уведомления на модальное окно
@@ -326,8 +323,6 @@ window.addEventListener('DOMContentLoaded', () =>{
         }, 3000);
     }
 
-    fetch('http://localhost:3000/menu')
-        .then(data=>data.json())
-        .then(res => console.log(res))
+    
 
-})
+});
