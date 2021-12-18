@@ -1,4 +1,6 @@
-function forms() {
+import {closeModal, openModal} from './modal';
+
+function forms(modalTimerId) {
 
     const forms = document.querySelectorAll('form');
     const message = {
@@ -22,8 +24,6 @@ function forms() {
     
         return await res.json();
     };
-
-
 
     function bindPostData(form) {
         form.addEventListener('submit', (e) => {
@@ -58,7 +58,7 @@ function forms() {
         const prevModalDialog = document.querySelector('.modal__dialog');
 
         prevModalDialog.classList.add('hide');
-        openModal();
+        openModal('.modal', modalTimerId);
 
         const thanksModal = document.createElement('div');
         thanksModal.classList.add('modal__dialog');
@@ -73,7 +73,7 @@ function forms() {
             thanksModal.remove();
             prevModalDialog.classList.add('show');
             prevModalDialog.classList.remove('hide');
-            closeModal();
+            closeModal('.modal');
         }, 4000);
     }
 }
